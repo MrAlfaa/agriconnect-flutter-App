@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriConnect Dashboard</title>
+    <script src="glitter.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+        #glitter-container {
+            width: 100%;
+            height: 100vh;
+        }
+        .dashboard-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dashboard-content {
+            padding: 15px;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+        }
+        .card-title-icon {
+            margin-right: 8px;
+        }
+        .weather-details {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .weather-icon {
+            font-size: 36px;
+            margin-right: 15px;
+        }
+        .weather-temp {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .weather-desc {
+            color: #666;
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .price-table th, .price-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .price-table th {
+            color: #4CAF50;
+        }
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .tip-icon {
+            color: #4CAF50;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .notification-badge {
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .action-button {
+            background-color: #f1f8e9;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            color: #4CAF50;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .action-button:hover {
+            background-color: #e8f5e9;
+        }
+    </style>
+</head>
+<body>
+    <div id="glitter-container">
+        <div class="dashboard-header">
+            <h2>AgriConnect Farmer Dashboard</h2>
+        </div>
+        <div class="dashboard-content">
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-title-icon">☀️</span>
+                    Weather Forecast
+                </div>
+                <div id="weather-data">
+                    <div class="weather-details">
+                        <div class="weather-icon">☀️</div>
+                        <div>
+                            <div class="weather-temp">28°C</div>
+                            <div class="weather-desc">Sunny, clear skies</div>
+                            <div>Humidity: 65% | Wind: 5 km/h</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <strong>3-Day Forecast:</strong>
+                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                            <div style="text-align: center;">
+                                <div>Tomorrow</div>
+                                <div>🌤️ 27°C</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div>Wed</div>
+                                <div>🌦️ 25°C</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div>Thu</div>
+                                <div>☀️ 29°C</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-title-icon">💰</span>
+                    Market Prices
+                    <span class="notification-badge">3</span>
+                </div>
+                <div id="crop-prices">
+                    <table class="price-table">
+                        <tr>
+                            <th>Crop</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                        </tr>
+                        <tr>
+                            <td>Rice</td>
+                            <td>Rs.2500/quintal</td>
+                            <td style="color: green;">↑ 3%</td>
+                        </tr>
+                        <tr>
+                            <td>Wheat</td>
+                            <td>Rs.2100/quintal</td>
+                            <td style="color: green;">↑ 1.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Cotton</td>
+                            <td>Rs.6200/quintal</td>
+                            <td style="color: red;">↓ 0.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Sugarcane</td>
+                            <td>Rs.280/quintal</td>
+                            <td style="color: green;">↑ 2.1%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-title-icon">💡</span>
+                    Farming Tips
+                </div>
+                <div id="farming-tips">
+                    <div class="tip-item">
+                        <span class="tip-icon">✓</span>
+                        <div>Check soil moisture levels regularly during this season to ensure optimal irrigation.</div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">✓</span>
+                        <div>Apply organic fertilizers in the early morning or late evening for best results.</div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">✓</span>
+                        <div>Monitor for pests more frequently during the current warm weather conditions.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-title-icon">⚡</span>
+                    Quick Actions
+                </div>
+                <div class="quick-actions">
+                    <button class="action-button" onclick="sendToFlutter({action: 'find_suppliers'})">Find Suppliers</button>
+                    <button class="action-button" onclick="sendToFlutter({action: 'check_subsidies'})">Check Subsidies</button>
+                    <button class="action-button" onclick="sendToFlutter({action: 'soil_test'})">Soil Testing</button>
+                    <button class="action-button" onclick="sendToFlutter({action: 'market_connect'})">Market Connect</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Initialize Glitter.js
+        document.addEventListener('DOMContentLoaded', function() {
+            // Your Glitter.js initialization code here
+            const glitter = new Glitter({
+                container: document.getElementById('glitter-container'),
+                // Add your Glitter.js configuration options here
+            });
+            
+            // Example: Communication with Flutter
+            window.addEventListener('message', function(event) {
+                const data = event.data;
+                // Process data from Flutter
+                console.log('Received from Flutter:', data);
+                
+                // You can update dashboard elements based on data from Flutter
+                if (data.updateWeather) {
+                    // Update weather data
+                }
+                
+                if (data.updatePrices) {
+                    // Update crop prices
+                }
+            });
+            
+            // Function to send data back to Flutter
+            window.sendToFlutter = function(data) {
+                // This will be captured by the WebView in Flutter
+                window.flutter_inappwebview.callHandler('flutterCallback', data);
+            }
+            
+            // Example: Send data to Flutter after 3 seconds
+            setTimeout(function() {
+                sendToFlutter({
+                    type: 'dashboard_loaded',
+                    message: 'Dashboard has loaded successfully'
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
