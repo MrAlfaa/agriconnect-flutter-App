@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'select_fruits_screen.dart';
 
 class BankDetailsScreen extends StatefulWidget {
-  const BankDetailsScreen({Key? key}) : super(key: key);
+  const BankDetailsScreen({super.key});
 
   @override
   State<BankDetailsScreen> createState() => _BankDetailsScreenState();
@@ -27,31 +27,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: 'Agri',
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              TextSpan(
-                text: 'connect',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+      // Removed the AppBar
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -60,9 +36,48 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 20),
+                // Agriconnect aligned to left
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Agri',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30, // Increased font size
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'connect',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30, // Increased font size
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // "Set up your account" aligned to left
                 const Text(
-                  'Enter your bank details',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  'Set up your account',
+                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(height: 20),
+                // "Enter your bank details" centered
+                const Center(
+                  child: Text(
+                    'Enter your bank details',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
@@ -73,7 +88,10 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    prefixIcon: Icon(Icons.account_balance, color: Colors.green),
+                    prefixIcon: Icon(
+                      Icons.account_balance,
+                      color: Colors.green,
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -120,7 +138,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                       return 'Please enter IFSC code';
                     }
                     // IFSC code format validation (11 characters, first 4 alphabets, 5th is 0, last 6 alphanumeric)
-                    RegExp ifscRegex = RegExp(r'^[A-Z]{4}0[A-Z0-9]{6}$');
+                    RegExp ifscRegex = RegExp(r'^[A-Z]{4}0[A-Z0-9]{6}');
                     if (!ifscRegex.hasMatch(value)) {
                       return 'Please enter a valid IFSC code';
                     }
@@ -154,7 +172,9 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                         // If the form is valid, proceed to the next screen
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const SelectFruitsScreen()),
+                          MaterialPageRoute(
+                            builder: (context) => const SelectFruitsScreen(),
+                          ),
                         );
                       }
                     },

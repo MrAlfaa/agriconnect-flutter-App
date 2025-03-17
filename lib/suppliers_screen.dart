@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class SuppliersScreen extends StatefulWidget {
-  const SuppliersScreen({Key? key}) : super(key: key);
+  const SuppliersScreen({super.key});
 
   @override
   State<SuppliersScreen> createState() => _SuppliersScreenState();
@@ -30,13 +30,11 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                 useShouldOverrideUrlLoading: true,
                 mediaPlaybackRequiresUserGesture: false,
               ),
-              android: AndroidInAppWebViewOptions(
-                useHybridComposition: true,
-              ),
+              android: AndroidInAppWebViewOptions(useHybridComposition: true),
             ),
             onWebViewCreated: (InAppWebViewController controller) {
               _webViewController = controller;
-              
+
               controller.addJavaScriptHandler(
                 handlerName: 'flutterCallback',
                 callback: (args) {
@@ -46,12 +44,14 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
               );
             },
             onLoadStop: (controller, url) async {
-              await controller.evaluateJavascript(source: """
+              await controller.evaluateJavascript(
+                source: """
                 console.log('Dashboard loaded completely');
-              """);
+              """,
+              );
             },
           ),
-          
+
           // Market tab
           Center(
             child: Column(
@@ -63,7 +63,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
               ],
             ),
           ),
-          
+
           // Profile tab
           Center(
             child: Column(
@@ -75,7 +75,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
               ],
             ),
           ),
-          
+
           // Settings tab
           Center(
             child: Column(
@@ -100,18 +100,12 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
           });
         },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Market',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',

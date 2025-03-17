@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'bank_details_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({super.key});
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -29,31 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: 'Agri',
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              TextSpan(
-                text: 'connect',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+      // Removed the AppBar
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -62,11 +38,42 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Set up your account',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                const SizedBox(height: 20),
+                // Agriconnect aligned to left
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Agri',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30, // Increased font size
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'connect',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30, // Increased font size
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 20),
+                // "Set up your account" aligned to left
+                const Text(
+                  'Set up your account',
+                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(height: 20),
+                // "Welcome farmers!" centered
                 Center(
                   child: Text(
                     'Welcome farmers!',
@@ -174,7 +181,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         // If the form is valid, proceed to the next screen
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const BankDetailsScreen()),
+                          MaterialPageRoute(
+                            builder: (context) => const BankDetailsScreen(),
+                          ),
                         );
                       }
                     },

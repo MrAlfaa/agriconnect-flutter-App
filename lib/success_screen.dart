@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'suppliers_screen.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({Key? key}) : super(key: key);
+  const SuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,16 @@ class SuccessScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SuppliersScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => const SuppliersScreen(),
+                  ),
                 );
               },
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 40,
+                ),
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Colors.white,
               ),
